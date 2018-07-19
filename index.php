@@ -24,10 +24,27 @@ function largefile($file) {
         
     function return_img($ext){
         $pic='no.gif';
-if($ext=='mp3' || $ext=='mp2' || $ext=='wav'){$pic='sound.gif';}
-if($ext=='png' || $ext=='jpg' || $ext=='jpeg'|| $ext=='bmp'|| $ext=='gif'){$pic='pic.gif';}
-if($ext=='7z' || $ext=='rar' || $ext=='zip'){$pic='arh.gif';}
-if($ext=='exe'){$pic='exe.gif';}
+if($ext=='3dm' || $ext=='3ds' || $ext=='dwg' || $ext=='dxf' || $ext=='max' || $ext=='obj'){$pic='3dm.gif';}
+if($ext=='zip' || $ext=='tar' || $ext=='sitx' || $ext=='7z' || $ext=='cbr' || $ext=='deb' || $ext=='gz' || $ext=='pkg' || $ext=='rpm' || $ext=='rar'){$pic='arh.gif';}
+if($ext=='aif' || $ext=='iff' || $ext=='m3u' || $ext=='m4u' || $ext=='mid' || $ext=='midi' || $ext=='mp3' || $ext=='mp2' || $ext=='mpa' || $ext=='ra' || $ext=='wav' || $ext=='wma'){$pic='sound.gif';}
+if($ext=='svg' || $ext=='ps' || $ext=='eps' || $ext=='ai'){$pic='vect.gif';}
+if($ext=='3gp' || $ext=='avi' || $ext=='flv' || $ext=='mov' || $ext=='m4v' || $ext=='mov' || $ext=='mp4' || $ext=='mpg' || $ext=='rm' || $ext=='srt' || $ext=='swf' || $ext=='vob' || $ext=='wmv'){$pic='vid.gif';}
+if($ext=='kmz' || $ext=='kml' || $ext=='gpx'){$pic='geo.gif';}
+if($ext=='doc' || $ext=='docx' || $ext=='ibooks' || $ext=='odt' || $ext=='pdf' || $ext=='rtf' || $ext=='tex' || $ext=='wpd' || $ext=='wps'){$pic='docs.gif';}
+if($ext=='uue' || $ext=='mim' || $ext=='keychain' || $ext=='hqx' || $ext=='cer'){$pic='encr.gif';}
+if($ext=='xhtml' || $ext=='rss' || $ext=='jsp' || $ext=='js' || $ext=='php' || $ext=='htm' || $ext=='html'){$pic='web.gif';}
+if($ext=='apk' || $ext=='app' || $ext=='dat' || $ext=='exe' || $ext=='jar' || $ext=='msi' || $ext=='pif' || $ext=='vb' || $ext=='wsf'){$pic='exe.gif';}
+if($ext=='conf' || $ext=='prf' || $ext=='cue' || $ext=='ini' || $ext=='cfg'){$pic='cfg.gif';}
+if($ext=='toast' || $ext=='vcd' || $ext=='mdf' || $ext=='iso' || $ext=='dmg' || $ext=='bin'){$pic='iso.gif';}
+if($ext=='crx' || $ext=='plugin'){$pic='plugin.gif';}
+if($ext=='bmp' || $ext=='gif' || $ext=='jpg' || $ext=='png' || $ext=='psd' || $ext=='tga' || $ext=='tif' || $ext=='tiff'|| $ext=='yuv'){$pic='pic.gif';}
+if($ext=='sys' || $ext=='lnk' || $ext=='ico' || $ext=='drv' || $ext=='dmp' || $ext=='dll' || $ext=='cur' || $ext=='cpl'|| $ext=='cab'){$pic='sys.gif';}
+if($ext=='sln' || $ext=='sh' || $ext=='py' || $ext=='pl' || $ext=='m' || $ext=='lua' || $ext=='java' || $ext=='h' || $ext=='cs' || $ext=='cpp' || $ext=='class'|| $ext=='c'){$pic='scr.gif';}
+if($ext=='txt' || $ext=='log'){$pic='txt.gif';}
+if($ext=='accdb' || $ext=='sql' || $ext=='pdb' || $ext=='mdb' || $ext=='dbf' || $ext=='dbf'){$pic='db.gif';}
+if($ext=='ttf' || $ext=='otf' || $ext=='fon' || $ext=='fnt'){$pic='fonts.gif';}
+if($ext=='xml' || $ext=='sdf' || $ext=='ged' || $ext=='gbr' || $ext=='dat' || $ext=='csv'){$pic='data.gif';}
+
 return $pic;
     }
 $dir = "files";
