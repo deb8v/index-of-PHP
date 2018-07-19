@@ -49,28 +49,29 @@ return $pic;
     }
 $dir = "files";
     if($handle = opendir($dir)){
-        echo '<table border="1" width="30%" cellpadding="3">';
-        echo '<tr><th> </th><th>files</th><th></th><th>size</th></tr>';
+        echo '<table border="1%" cellpadding="1%">';
+        echo '<tr><th></th><th>Files</th><th></th><th>Size</th><th>Last edit</th></tr>';
         while(false !== ($file = readdir($handle))) {
             if($file != "." && $file != ".."){
         
         
-            echo '<tr>';
-            if(is_dir('files/'.$file)){echo '<td bgcolor="#FAA">';}else{echo '<td bgcolor="#AFA">';}
-            echo ' ';
+            echo '<tr>'; if(is_dir('files/'.$file)){echo '<td bgcolor="#F00">';}else{echo '<td bgcolor="#0F0">';}echo ' ';
+
             echo '</td><td>';
+            
             echo '<a href="files/'.$file.'">'.$file.'</a>';
             echo '</td><td>';
-            if(is_dir('files/'.$file)){echo '<img align="moddle" src="fld.gif"/>';}else{ 
+            if(is_dir('files/'.$file)){echo '<img src="ico/fld.gif"/>';}else{ 
                 //echo file_extension("file/".$file);
-                echo '<img align="moddle" src="'.return_img(file_extension($file)).'"/>';
+                echo '<img align="center" src="ico/'.return_img(file_extension($file)).'"/>';
             }
            
             echo '</td><td>';
             if(!is_dir('files/'.$file)){ echo largefile("files/".$file);}else{echo 'dir';}
+            echo '</td><td>';
             
-            echo '</td>';
-            echo '</tr>';
+if (file_exists('files/'.$file)) {echo date("d.m.Y H:i",filectime('files/'.$file));}
+            echo '</td></tr>';
 
         }
           
