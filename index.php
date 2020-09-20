@@ -1,83 +1,162 @@
-
-<?php
-error_reporting(-1);
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>1111</title>
+    </head> 
+<?php 
 header('Content-Type: text/html; charset=utf-8');
-function largefile($file) {
-    $file   =  filesize($file);
-    $sizekb = $file / 1024;
-    $sizemb = $sizekb / 1024;
-    $sizegb = $sizemb / 1024;
-    $sizetb = $sizegb / 1024;
 
-    if ($file > 1) {$size = round($file,2) ." b";}
-    if ($sizekb > 1) {$size = round($sizekb,2) ." Kb";}
-    if ($sizemb > 1) {$size = round($sizemb,2) . " Mb";}
-    if ($sizegb > 1) {$size = round($sizegb,2) ." Gb";}
-    if ($sizetb > 1) {$size = round($sizetb,2) ." Tb";}
-    
-    return $size;
-    }
-    function file_extension($filename) {
-        $file_info = pathinfo($filename);
-        return $file_info['extension'];
-        }
-        
-    function return_img($ext){
-        $pic='no.gif';
-if($ext=='3dm' || $ext=='3ds' || $ext=='dwg' || $ext=='dxf' || $ext=='max' || $ext=='obj'){$pic='3dm.gif';}
-if($ext=='zip' || $ext=='tar' || $ext=='sitx' || $ext=='7z' || $ext=='cbr' || $ext=='deb' || $ext=='gz' || $ext=='pkg' || $ext=='rpm' || $ext=='rar'){$pic='arh.gif';}
-if($ext=='aif' || $ext=='iff' || $ext=='m3u' || $ext=='m4u' || $ext=='mid' || $ext=='midi' || $ext=='mp3' || $ext=='mp2' || $ext=='mpa' || $ext=='ra' || $ext=='wav' || $ext=='wma'){$pic='sound.gif';}
-if($ext=='svg' || $ext=='ps' || $ext=='eps' || $ext=='ai'){$pic='vect.gif';}
-if($ext=='3gp' || $ext=='avi' || $ext=='flv' || $ext=='mov' || $ext=='m4v' || $ext=='mov' || $ext=='mp4' || $ext=='mpg' || $ext=='rm' || $ext=='srt' || $ext=='swf' || $ext=='vob' || $ext=='wmv'){$pic='vid.gif';}
-if($ext=='kmz' || $ext=='kml' || $ext=='gpx'){$pic='geo.gif';}
-if($ext=='doc' || $ext=='docx' || $ext=='ibooks' || $ext=='odt' || $ext=='pdf' || $ext=='rtf' || $ext=='tex' || $ext=='wpd' || $ext=='wps'){$pic='docs.gif';}
-if($ext=='uue' || $ext=='mim' || $ext=='keychain' || $ext=='hqx' || $ext=='cer'){$pic='encr.gif';}
-if($ext=='xhtml' || $ext=='rss' || $ext=='jsp' || $ext=='js' || $ext=='php' || $ext=='htm' || $ext=='html'){$pic='web.gif';}
-if($ext=='apk' || $ext=='app' || $ext=='dat' || $ext=='exe' || $ext=='jar' || $ext=='msi' || $ext=='pif' || $ext=='vb' || $ext=='wsf'){$pic='exe.gif';}
-if($ext=='conf' || $ext=='prf' || $ext=='cue' || $ext=='ini' || $ext=='cfg'){$pic='cfg.gif';}
-if($ext=='toast' || $ext=='vcd' || $ext=='mdf' || $ext=='iso' || $ext=='dmg' || $ext=='bin'){$pic='iso.gif';}
-if($ext=='crx' || $ext=='plugin'){$pic='plugin.gif';}
-if($ext=='bmp' || $ext=='gif' || $ext=='jpg' || $ext=='png' || $ext=='psd' || $ext=='tga' || $ext=='tif' || $ext=='tiff'|| $ext=='yuv'){$pic='pic.gif';}
-if($ext=='sys' || $ext=='lnk' || $ext=='ico' || $ext=='drv' || $ext=='dmp' || $ext=='dll' || $ext=='cur' || $ext=='cpl'|| $ext=='cab'){$pic='sys.gif';}
-if($ext=='sln' || $ext=='sh' || $ext=='py' || $ext=='pl' || $ext=='m' || $ext=='lua' || $ext=='java' || $ext=='h' || $ext=='cs' || $ext=='cpp' || $ext=='class'|| $ext=='c'){$pic='scr.gif';}
-if($ext=='txt' || $ext=='log'){$pic='txt.gif';}
-if($ext=='accdb' || $ext=='sql' || $ext=='pdb' || $ext=='mdb' || $ext=='dbf' || $ext=='dbf'){$pic='db.gif';}
-if($ext=='ttf' || $ext=='otf' || $ext=='fon' || $ext=='fnt'){$pic='fonts.gif';}
-if($ext=='xml' || $ext=='sdf' || $ext=='ged' || $ext=='gbr' || $ext=='dat' || $ext=='csv'){$pic='data.gif';}
+$dir="dir/";
 
-return $pic;
-    }
-$dir = "files";
-    if($handle = opendir($dir)){
-        echo '<table border="1%" cellpadding="1%">';
-        echo '<tr><th></th><th>Files</th><th></th><th>Size</th><th>Last edit</th></tr>';
-        while(false !== ($file = readdir($handle))) {
-            if($file != "." && $file != ".."){
-        
-        
-            echo '<tr>'; if(is_dir('files/'.$file)){echo '<td bgcolor="#F00">';}else{echo '<td bgcolor="#0F0">';}echo ' ';
+$path = scandir($dir);
+ 
+explore($dir);
 
-            echo '</td><td>';
-            
-            echo '<a href="files/'.$file.'">'.$file.'</a>';
-            echo '</td><td>';
-            if(is_dir('files/'.$file)){echo '<img src="ico/fld.gif"/>';}else{ 
-                //echo file_extension("file/".$file);
-                echo '<img align="center" src="ico/'.return_img(file_extension($file)).'"/>';
+function explore($fld){
+
+$path = scandir($fld);
+echo("<table>");
+echo('<tr><th></th><th></th><th></th></tr>');
+foreach($path as $k){
+    if($k!='.' && $k!='..'){
+        $ft=end(explode(".", $k));
+        $cdir=$fld.'/'.$k;
+        $pdir=fileperms($cdir);
+        
+        echo '<tr>';
+        if(!is_dir($cdir)){
+        echo "<td>".'<a download href="/'.$cdir.'">💾</a>&nbsp;<a href="/'.$cdir.'">👁</a></td> '; 
+        echo '<td class="filesize">'.human_filesize(filsize_32b($cdir)).'</td>';
+        echo '<td>';
+        
+        echo '</td>';}else{echo '<td colspan="3"><center><b>'.$k.'\\<br>'.permis($pdir).'<b></center>';}
+        echo '<td class="w100">';
+        if(!is_dir($cdir)){
+            if($ft=='mp4' ||$ft=='m4a' ||$ft=='m4p' ||$ft=='m4b' ||$ft=='m4r' ||$ft=='MOV'){returnvid($cdir,$k);}else
+            if($ft=='mp3' ||$ft=='ogg'||$ft=='wav'){returnmusik($cdir,$k);}else
+            if($ft=='pdf' ||$ft=='html'){returnframe($cdir,$k);}else{
+                echo $k;}
             }
-           
-            echo '</td><td>';
-            if(!is_dir('files/'.$file)){ echo largefile("files/".$file);}else{echo 'dir';}
-            echo '</td><td>';
-            
-if (file_exists('files/'.$file)) {echo date("d.m.Y H:i",filectime('files/'.$file));}
-            echo '</td></tr>';
-
-        }
-          
+        if(is_dir($cdir)){explore($cdir);}
+        echo '</td>';
+        echo "</tr>";
     }
-    echo '</table>';      
+}
+echo("</table>");
+
+}
+function returnvid($k,$n){
+
+   echo '<details closed>';
+   echo '<summary>📹'.$n.'</summary><br>';
+    echo '<video class="vid" controls="controls">';
+     echo '<source src="/'.$k.'">';
+     
+     
+    echo '</video>';
+  echo '</details>';
+
 }
 
+function returnmusik($k,$n){
+    echo '<details closed>';
+        echo '<summary>💿'.$n.'</summary><br>';
+    echo '<audio controls>';
+        echo '<source src="/'.$k.'">';
+    echo '</audio>';
+  echo '</details>';
+}
 
+function returnframe($k,$n){
+    $uc=uniqid();
+    //$void='document.getElementById(\''.$uc.'\').style.visibility=1';
+    //$void="console.log(999)";
+    $void="document.getElementById('$uc').style.display=''";
+    echo '<details closed>';
+    echo '<summary onclick="'.$void.'">✅'.$n.'</summary><br>';
+            echo '<iframe style="display: none;" id='.$uc.' class="w100 h100" src="'.'/'.$k.'">';
+        echo '</iframe>';
+  echo '</details>';
+}
+
+function human_filesize($bytes, $decimals = 2) {
+    $size = array('Б','кБ','МБ','ГБ');
+    $factor = (int) floor((strlen($bytes) - 1) / 3);
+    return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
+}
+
+function filsize_32b($file) {
+    $filez = filesize($file);
+    if($filez < 0) {  return (($filez + PHP_INT_MAX) + PHP_INT_MAX + 2); }
+    else { return $filez; }
+}
+function permis($perms){
+// u
+$info .= (($perms & 0x0100) ? 'r' : '-');
+$info .= (($perms & 0x0080) ? 'w' : '-');
+// gr
+$info .= (($perms & 0x0020) ? 'r' : '-');
+$info .= (($perms & 0x0010) ? 'w' : '-');
+// oth
+$info .= (($perms & 0x0004) ? 'r' : '-');
+$info .= (($perms & 0x0002) ? 'w' : '-');
+
+return $info;
+}
 ?>
+
+
+
+<style>
+.vid{
+    max-height:40em;
+}
+.filesize{
+    font-size:14px;}
+.w100{
+    width:100%;
+}
+.h100{
+    min-height:40em;
+    height:100%;
+}
+body{
+    font-size:3em;
+}
+ul {
+    padding:0;
+    list-style: none;
+}
+a{
+    
+    text-decoration:none;
+}
+a:before {
+    padding-right:10px;
+    font-weight: bold;
+    color: #77AEDB;
+    
+    transition-duration: 0.5s;
+}
+a:hover:before {
+    color: #337AB7;
+    
+}
+td:first-child {
+border-left: 2px dotted #56433D;
+border-right: none;
+border-top: 2px solid #56433D;
+
+}
+td:last-child {
+border-left: 2px solid #56433D;
+border-right: none;
+border-bottom:2px solid #56433D;
+}
+
+td:last-child{
+    border-bottom:2px solid #56433D;
+    
+}
+}
+</style>
