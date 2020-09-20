@@ -18,3 +18,4 @@ $dir="dir/";
 ```  
 ![иллюстрация](https://sun9-58.userapi.com/IYosqYcl_LxQvbutguLCLKajJ7j9Mq1j3U0Y7g/3K9ZJ3zzrPA.jpg)
 
+_Каталог ico является архаизмом из версии 2017 года и был нарисован вручную._
